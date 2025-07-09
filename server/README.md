@@ -1,6 +1,7 @@
 # NLW Agents
 
-API REST desenvolvida durante o evento NLW da Rocketseat para gerenciamento de salas.
+API REST desenvolvida durante o evento NLW da Rocketseat para gerenciamento de salas e sistema de
+perguntas em tempo real.
 
 ## 🚀 Tecnologias
 
@@ -11,6 +12,7 @@ API REST desenvolvida durante o evento NLW da Rocketseat para gerenciamento de s
 - **PostgreSQL** - Banco de dados relacional
 - **Zod** - Biblioteca de validação e parsing de schemas
 - **Biome** - Linter e formatador de código
+- **WebSocket** - Comunicação em tempo real
 
 ## 📋 Pré-requisitos
 
@@ -64,8 +66,18 @@ npm start
 
 ## 📡 Endpoints
 
+### Salas
 - `GET /health` - Health check
 - `GET /rooms` - Lista todas as salas
+- `POST /rooms` - Cria uma nova sala
+- `GET /rooms/:roomId` - Busca uma sala específica
+
+### Perguntas
+- `POST /rooms/:roomId/messages` - Cria uma nova pergunta
+- `GET /rooms/:roomId/messages` - Lista perguntas da sala
+- `PATCH /rooms/:roomId/messages/:messageId/react` - Adiciona reação a pergunta
+- `DELETE /rooms/:roomId/messages/:messageId/react` - Remove reação da pergunta
+- `PATCH /rooms/:roomId/messages/:messageId/answer` - Marca pergunta como respondida
 
 ## 🛠️ Scripts Disponíveis
 
@@ -82,3 +94,5 @@ npm start
 - **Environment Variables** - Configuração via `.env`
 - **Database Migrations** - Controle de versão do schema
 - **Code Formatting** - Biome para consistência
+- **WebSocket Integration** - Comunicação em tempo real
+- **RESTful API** - Padrão REST para endpoints HTTP
