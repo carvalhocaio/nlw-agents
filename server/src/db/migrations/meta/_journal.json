@@ -15,6 +15,13 @@
       "when": 1752023815035,
       "tag": "0001_wooden_killmonger",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1752198685809,
+      "tag": "0002_massive_frog_thor",
+      "breakpoints": true
     }
   ]
 }
