@@ -1,8 +1,10 @@
 # NLW Agents
 
-**Let me Ask** - Projeto desenvolvido durante o evento da **Rocketseat** para criação de uma aplicação web completa com sistema de salas e perguntas com IA.
+**Let me Ask** - Projeto desenvolvido durante o evento da **Rocketseat** para criação de uma 
+aplicação web completa com sistema de salas e perguntas com IA.
 
-Uma aplicação de perguntas e respostas com inteligência artificial, onde os usuários podem criar salas personalizadas, fazer perguntas e receber respostas geradas por IA.
+Uma aplicação de perguntas e respostas com inteligência artificial, onde os usuários podem criar 
+salas personalizadas, fazer perguntas e receber respostas geradas por IA.
 
 ## 🚀 Tecnologias
 
@@ -11,6 +13,7 @@ Uma aplicação de perguntas e respostas com inteligência artificial, onde os u
 - **Fastify** - Framework web performático
 - **Drizzle ORM** - ORM type-safe para TypeScript
 - **PostgreSQL** com pgvector - Banco de dados com suporte a vetores
+- **Google Gemini AI** - IA para transcrição e geração de respostas
 - **Zod** - Validação de schemas
 - **Docker** - Containerização
 
@@ -18,16 +21,18 @@ Uma aplicação de perguntas e respostas com inteligência artificial, onde os u
 - **React 19** com TypeScript
 - **Vite** - Build tool moderno
 - **TailwindCSS 4** - Framework CSS utility-first
-- **React Router DOM** - Roteamento
+- **React Router DOM** - Roteamento com suporte a gravação de áudio
 - **TanStack Query** - Gerenciamento de estado assíncrono
 - **React Hook Form** - Gerenciamento de formulários
 - **Shadcn/ui** - Sistema de componentes
+- **Web APIs** - MediaRecorder para gravação de áudio
 - **Lucide React** - Ícones
 
 ## 📋 Pré-requisitos
 
 - Node.js 18+
 - Docker e Docker Compose
+- **Chave da API do Google Gemini** (para IA)
 - npm ou yarn
 
 ## 🔧 Instalação
@@ -93,11 +98,13 @@ nlw-agents/
 ├── server/                    # Backend da aplicação
 │   ├── src/
 │   │   ├── db/
-│   │   │   ├── schema/        # Esquemas do banco (rooms, questions)
+│   │   │   ├── schema/        # Esquemas do banco (rooms, questions, audio-chunks)
 │   │   │   ├── migrations/    # Migrações do banco
-│   │   │   └── connection.ts  # Conexão com PostgreSQL
+│   │   │   └── connection.ts  # Conexão com PostgreSQL + pgvector
 │   │   ├── http/
-│   │   │   └── routes/        # Rotas da API REST
+│   │   │   └── routes/        # Rotas da API REST (rooms, questions, audio)
+│   │   ├── services/
+│   │   │   └── gemini.ts      # Integração com Google Gemini AI
 │   │   ├── env.ts             # Configuração de ambiente
 │   │   └── server.ts          # Servidor principal
 │   ├── docker/                # Configuração Docker
@@ -113,6 +120,9 @@ nlw-agents/
     │   ├── http/              # Hooks e tipos para API
     │   ├── lib/               # Utilitários (dayjs, utils)
     │   ├── pages/             # Páginas da aplicação
+    │   │   ├── create-room.tsx
+    │   │   ├── room.tsx
+    │   │   └── record-room-audio.tsx # Página de gravação
     │   └── app.tsx            # Roteamento principal
     └── public/
 ```
@@ -131,6 +141,15 @@ nlw-agents/
 - **Interface de perguntas e respostas** com IA
 - **Estados visuais** para carregamento de respostas
 - **Histórico de perguntas** organizadas por data
+- **Geração de respostas** com Google Gemini AI
+
+### ✅ Sistema de Áudio e IA
+- **Gravação de áudio** em tempo real via Web APIs
+- **Transcrição automática** com Google Gemini AI
+- **Upload em chunks** de 5 segundos para processamento
+- **Embeddings vetoriais** para busca semântica
+- **Busca contextual** em transcrições de áudio
+- **Respostas baseadas em contexto** das aulas gravadas
 
 ### ✅ Interface Moderna
 - **Design System** completo com Shadcn/ui
@@ -142,6 +161,8 @@ nlw-agents/
 ### ✅ API REST Completa
 - **CRUD de salas** (Create, Read)
 - **CRUD de perguntas** (Create, Read)
+- **Upload e processamento de áudio** com IA
+- **Busca semântica** com embeddings vetoriais
 - **Validação** com Zod
 - **Tipagem** TypeScript end-to-end
 - **CORS** configurado para desenvolvimento
@@ -156,6 +177,10 @@ nlw-agents/
 ### Perguntas
 - `GET /rooms/:roomId/questions` - Lista perguntas de uma sala
 - `POST /rooms/:roomId/questions` - Cria nova pergunta
+
+### Áudio e IA
+- `POST /rooms/:roomId/audio` - Upload de áudio com transcrição automática
+- **Processamento**: Transcrição → Embeddings → Armazenamento vetorial
 
 ## �️ Scripts Disponíveis
 
@@ -185,6 +210,7 @@ make format         # Formata código
 # server/.env
 PORT=3333
 DATABASE_URL="postgresql://docker:docker@localhost:5432/agents"
+GEMINI_API_KEY="sua_chave_da_api_do_gemini"
 ```
 
 ### Banco de Dados
@@ -222,10 +248,37 @@ O projeto utiliza PostgreSQL com a extensão pgvector para suporte a vetores de 
 - **Formulário de perguntas** com validação
 - **Lista de perguntas** e respostas
 - **Estados de carregamento** para IA
+- **Link para gravação** de áudio integrado
+
+### 🎙️ Página de Gravação (`/room/:roomId/audio`)
+- **Gravação de áudio** em tempo real
+- **Controles de gravação** (iniciar/pausar)
+- **Upload automático** em chunks de 5 segundos
+- **Verificação de compatibilidade** do navegador
+- **Processamento com IA** (transcrição + embeddings)
 
 ## 🔄 Fluxo de Dados
 
 1. **Criação de sala**: Form → API → Database → Atualização da lista
 2. **Listagem**: Cache TanStack Query → Renderização otimizada
 3. **Perguntas**: Validação → API → Database → Interface de resposta
-4. **Navegação**: React Router → Lazy loading → SEO otimizado
+4. **Gravação de áudio**: MediaRecorder → Chunks → Upload → Gemini AI → Transcrição → Embeddings → PostgreSQL
+5. **Respostas contextuais**: Pergunta → Busca semântica → Contexto → Gemini AI → Resposta
+6. **Navegação**: React Router → Lazy loading → SEO otimizado
+
+## 🤖 Integração com IA
+
+### Google Gemini AI
+- **Modelo**: `gemini-2.5-flash` para transcrição e respostas
+- **Embeddings**: `text-embedding-004` para busca semântica
+- **Transcrição**: Conversão de áudio para texto em português
+- **Geração de respostas**: Baseada no contexto das transcrições
+- **Busca vetorial**: PostgreSQL + pgvector para busca semântica
+
+### Fluxo de Processamento de Áudio
+1. **Captura**: MediaRecorder API (WebM, 64kbps)
+2. **Upload**: Chunks de 5s via FormData
+3. **Transcrição**: Google Gemini AI
+4. **Embeddings**: Vetorização do texto
+5. **Armazenamento**: PostgreSQL com pgvector
+6. **Busca**: Similaridade semântica para respostas contextuais
