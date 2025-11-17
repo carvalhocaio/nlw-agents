@@ -58,7 +58,7 @@ npm install
 ### 4. Configure o banco de dados
 ```bash
 cd server
-docker-compose up -d
+docker compose up -d
 ```
 
 ### 5. Execute as migrações
