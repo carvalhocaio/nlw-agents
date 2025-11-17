@@ -1,284 +1,302 @@
 # NLW Agents
 
-**Let me Ask** - Projeto desenvolvido durante o evento da **Rocketseat** para criação de uma 
-aplicação web completa com sistema de salas e perguntas com IA.
+<div align="center">
+  <img src=".github/screenshot-1.png" alt="Application Home Page" width="800px">
+  <img src=".github/screenshot-2.png" alt="Question Room Page" width="800px">
+</div>
 
-Uma aplicação de perguntas e respostas com inteligência artificial, onde os usuários podem criar 
-salas personalizadas, fazer perguntas e receber respostas geradas por IA.
+**Let me Ask** - A complete web application with AI-powered Q&A system developed during Rocketseat's NLW event.
 
-## 🚀 Tecnologias
+An intelligent question and answer application where users can create custom rooms, ask questions, and receive AI-generated responses powered by Google Gemini.
+
+## Tech Stack
 
 ### Backend
-- **Node.js** com TypeScript
-- **Fastify** - Framework web performático
-- **Drizzle ORM** - ORM type-safe para TypeScript
-- **PostgreSQL** com pgvector - Banco de dados com suporte a vetores
-- **Google Gemini AI** - IA para transcrição e geração de respostas
-- **Zod** - Validação de schemas
-- **Docker** - Containerização
+- **Node.js** with TypeScript
+- **Fastify** - High-performance web framework
+- **Drizzle ORM** - Type-safe ORM for TypeScript
+- **PostgreSQL** with pgvector - Vector database for semantic search
+- **Google Gemini AI** - AI for transcription and answer generation
+- **Zod** - Schema validation
+- **Docker** - Containerization
+- **Turborepo** - Monorepo build system
+- **pnpm** - Fast, disk space efficient package manager
 
 ### Frontend
-- **React 19** com TypeScript
-- **Vite** - Build tool moderno
-- **TailwindCSS 4** - Framework CSS utility-first
-- **React Router DOM** - Roteamento com suporte a gravação de áudio
-- **TanStack Query** - Gerenciamento de estado assíncrono
-- **React Hook Form** - Gerenciamento de formulários
-- **Shadcn/ui** - Sistema de componentes
-- **Web APIs** - MediaRecorder para gravação de áudio
-- **Lucide React** - Ícones
+- **React 19** with TypeScript
+- **Vite** - Modern build tool
+- **TailwindCSS 4** - Utility-first CSS framework
+- **React Router DOM** - Routing with audio recording support
+- **TanStack Query** - Async state management
+- **React Hook Form** - Form management
+- **Shadcn/ui** - Component system
+- **Web APIs** - MediaRecorder for audio recording
+- **Lucide React** - Icons
 
-## 📋 Pré-requisitos
+## Prerequisites
 
 - Node.js 18+
-- Docker e Docker Compose
-- **Chave da API do Google Gemini** (para IA)
-- npm ou yarn
+- Docker and Docker Compose
+- **Google Gemini API Key** (for AI features)
+- pnpm
 
-## 🔧 Instalação
+## Installation
 
-### 1. Clone o repositório
+### 1. Clone the repository
 ```bash
-git clone <url-do-repositorio>
+git clone <repository-url>
 cd nlw-agents
 ```
 
-### 2. Configure o backend
+### 2. Install dependencies
+```bash
+pnpm install
+```
+
+### 3. Configure environment variables
 ```bash
 cd server
-npm install
+cp .env-example .env
+# Add your Google Gemini API key to the .env file
+# GEMINI_API_KEY=your_key_here
 ```
 
-### 3. Configure o frontend
-```bash
-cd web
-npm install
-```
-
-### 4. Configure o banco de dados
+### 4. Start the database
 ```bash
 cd server
 docker compose up -d
 ```
 
-### 5. Execute as migrações
+### 5. Run migrations
 ```bash
-cd server
-make migrate
+pnpm db:migrate
 ```
 
-### 6. Popule o banco (opcional)
+### 6. Seed the database (optional)
 ```bash
-cd server
-make seed
+pnpm db:seed
 ```
 
-## 🏃‍♂️ Executando o projeto
+## Running the Project
 
-### Backend
+### Development
 ```bash
-cd server
-make dev
+pnpm dev
 ```
 
-### Frontend
+This will start both backend and frontend in parallel using Turborepo.
+
+### Build
 ```bash
-cd web
-npm run dev
+pnpm build
 ```
 
-A aplicação estará disponível em:
+The application will be available at:
 - **Frontend**: http://localhost:5173
 - **Backend**: http://localhost:3333
 
-## 📁 Estrutura do Projeto
+## Project Structure
 
 ```
 nlw-agents/
-├── server/                    # Backend da aplicação
+├── server/                    # Backend application
 │   ├── src/
 │   │   ├── db/
-│   │   │   ├── schema/        # Esquemas do banco (rooms, questions, audio-chunks)
-│   │   │   ├── migrations/    # Migrações do banco
-│   │   │   └── connection.ts  # Conexão com PostgreSQL + pgvector
+│   │   │   ├── schema/        # Database schemas (rooms, questions, audio-chunks)
+│   │   │   ├── migrations/    # Database migrations
+│   │   │   └── connection.ts  # PostgreSQL + pgvector connection
 │   │   ├── http/
-│   │   │   └── routes/        # Rotas da API REST (rooms, questions, audio)
+│   │   │   └── routes/        # REST API routes (rooms, questions, audio)
 │   │   ├── services/
-│   │   │   └── gemini.ts      # Integração com Google Gemini AI
-│   │   ├── env.ts             # Configuração de ambiente
-│   │   └── server.ts          # Servidor principal
-│   ├── docker/                # Configuração Docker
+│   │   │   └── gemini.ts      # Google Gemini AI integration
+│   │   ├── env.ts             # Environment configuration
+│   │   └── server.ts          # Main server
+│   ├── docker/                # Docker configuration
 │   └── docker-compose.yml     # PostgreSQL + pgvector
-└── web/                       # Frontend da aplicação
+└── web/                       # Frontend application
     ├── src/
     │   ├── components/
-    │   │   ├── ui/            # Componentes Shadcn/ui
+    │   │   ├── ui/            # Shadcn/ui components
     │   │   ├── create-room-form.tsx
     │   │   ├── question-form.tsx
     │   │   ├── question-item.tsx
     │   │   └── room-list.tsx
-    │   ├── http/              # Hooks e tipos para API
-    │   ├── lib/               # Utilitários (dayjs, utils)
-    │   ├── pages/             # Páginas da aplicação
+    │   ├── http/              # API hooks and types
+    │   ├── lib/               # Utilities (dayjs, utils)
+    │   ├── pages/             # Application pages
     │   │   ├── create-room.tsx
     │   │   ├── room.tsx
-    │   │   └── record-room-audio.tsx # Página de gravação
-    │   └── app.tsx            # Roteamento principal
+    │   │   └── record-room-audio.tsx # Recording page
+    │   └── app.tsx            # Main routing
     └── public/
 ```
 
-## 🎯 Funcionalidades Implementadas
+## Implemented Features
 
-### ✅ Sistema de Salas
-- **Criação de salas** com nome e descrição
-- **Listagem de salas** com informações resumidas
-- **Navegação entre salas** com roteamento dinâmico
-- **Contador de perguntas** por sala
-- **Data de criação** com formatação relativa
+### Room System
+- **Create rooms** with name and description
+- **List rooms** with summary information
+- **Navigate between rooms** with dynamic routing
+- **Question counter** per room
+- **Creation date** with relative formatting
 
-### ✅ Sistema de Perguntas
-- **Formulário de perguntas** com validação (10-500 caracteres)
-- **Interface de perguntas e respostas** com IA
-- **Estados visuais** para carregamento de respostas
-- **Histórico de perguntas** organizadas por data
-- **Geração de respostas** com Google Gemini AI
+### Question System
+- **Question form** with validation (10-500 characters)
+- **Q&A interface** with AI
+- **Visual states** for answer loading
+- **Question history** organized by date
+- **Answer generation** with Google Gemini AI
 
-### ✅ Sistema de Áudio e IA
-- **Gravação de áudio** em tempo real via Web APIs
-- **Transcrição automática** com Google Gemini AI
-- **Upload em chunks** de 5 segundos para processamento
-- **Embeddings vetoriais** para busca semântica
-- **Busca contextual** em transcrições de áudio
-- **Respostas baseadas em contexto** das aulas gravadas
+### Audio & AI System
+- **Real-time audio recording** via Web APIs
+- **Automatic transcription** with Google Gemini AI
+- **Upload in 5-second chunks** for processing
+- **Vector embeddings** for semantic search
+- **Contextual search** in audio transcriptions
+- **Context-based answers** from recorded lessons
 
-### ✅ Interface Moderna
-- **Design System** completo com Shadcn/ui
-- **Tema dark** por padrão
-- **Componentes reutilizáveis** (Cards, Buttons, Forms)
-- **Responsividade** total
-- **Animações** e transições suaves
+### Modern Interface
+- **Complete Design System** with Shadcn/ui
+- **Dark theme** by default
+- **Reusable components** (Cards, Buttons, Forms)
+- **Full responsiveness**
+- **Smooth animations** and transitions
 
-### ✅ API REST Completa
-- **CRUD de salas** (Create, Read)
-- **CRUD de perguntas** (Create, Read)
-- **Upload e processamento de áudio** com IA
-- **Busca semântica** com embeddings vetoriais
-- **Validação** com Zod
-- **Tipagem** TypeScript end-to-end
-- **CORS** configurado para desenvolvimento
+### Complete REST API
+- **Room CRUD** (Create, Read)
+- **Question CRUD** (Create, Read)
+- **Audio upload and processing** with AI
+- **Semantic search** with vector embeddings
+- **Validation** with Zod
+- **End-to-end TypeScript** typing
+- **CORS** configured for development
 
-## 📡 Endpoints da API
+## API Endpoints
 
-### Salas
+### Rooms
 - `GET /health` - Health check
-- `GET /rooms` - Lista todas as salas com contador de perguntas
-- `POST /rooms` - Cria uma nova sala
+- `GET /rooms` - List all rooms with question counter
+- `POST /rooms` - Create a new room
 
-### Perguntas
-- `GET /rooms/:roomId/questions` - Lista perguntas de uma sala
-- `POST /rooms/:roomId/questions` - Cria nova pergunta
+### Questions
+- `GET /rooms/:roomId/questions` - List questions from a room
+- `POST /rooms/:roomId/questions` - Create new question
 
-### Áudio e IA
-- `POST /rooms/:roomId/audio` - Upload de áudio com transcrição automática
-- **Processamento**: Transcrição → Embeddings → Armazenamento vetorial
+### Audio & AI
+- `POST /rooms/:roomId/audio` - Audio upload with automatic transcription
+- **Processing**: Transcription → Embeddings → Vector storage
 
-## �️ Scripts Disponíveis
+## Available Scripts
 
-### Backend
 ```bash
-npm run dev          # Servidor em desenvolvimento
-npm run start        # Servidor em produção
-npm run db:seed      # Popula banco com dados de teste
-make generate        # Gera migrações
-make migrate         # Executa migrações
-make studio         # Abre Drizzle Studio
-make format         # Formata código
+pnpm dev          # Start development servers
+pnpm build        # Build all packages
+pnpm db:generate  # Generate migrations
+pnpm db:migrate   # Run migrations
+pnpm db:seed      # Seed database with test data
+pnpm db:studio    # Open Drizzle Studio
+pnpm format       # Format code
 ```
 
-### Frontend
-```bash
-npm run dev         # Servidor de desenvolvimento
-npm run build       # Build para produção
-npm run preview     # Preview da build
-make format         # Formata código
-```
+## Environment Configuration
 
-## 🔧 Configuração do Ambiente
-
-### Variáveis de Ambiente (Backend)
+### Environment Variables (Backend)
 ```env
 # server/.env
 PORT=3333
 DATABASE_URL="postgresql://docker:docker@localhost:5432/agents"
-GEMINI_API_KEY="sua_chave_da_api_do_gemini"
+GEMINI_API_KEY="your_gemini_api_key"
 ```
 
-### Banco de Dados
-O projeto utiliza PostgreSQL com a extensão pgvector para suporte a vetores de IA:
-- **Imagem**: `pgvector/pgvector:pg17`
-- **Usuário**: `docker`
-- **Senha**: `docker`
+### Database
+The project uses PostgreSQL with the pgvector extension for AI vector support:
+- **Image**: `pgvector/pgvector:pg17`
+- **User**: `docker`
+- **Password**: `docker`
 - **Database**: `agents`
-- **Porta**: `5432`
+- **Port**: `5432`
 
-## 🎨 Design System
+## Design System
 
-### Componentes UI
-- **Shadcn/ui** com tema personalizado
-- **Radix UI** como base primitiva
-- **Tailwind CSS** para estilização
-- **Lucide React** para ícones consistentes
+### UI Components
+- **Shadcn/ui** with custom theme
+- **Radix UI** as primitive base
+- **Tailwind CSS** for styling
+- **Lucide React** for consistent icons
 
-### Tema e Cores
-- **Tema dark** por padrão
-- **Paleta**: Zinc como cor base
-- **Tipografia**: Sistema de fontes otimizado
-- **Espacamento**: Grid system do Tailwind
+### Theme & Colors
+- **Dark theme** by default
+- **Palette**: Zinc as base color
+- **Typography**: Optimized font system
+- **Spacing**: Tailwind grid system
 
-## 📱 Páginas da Aplicação
+## Application Pages
 
-### 🏠 Página Inicial (`/`)
-- **Grid layout** com duas colunas
-- **Formulário de criação** de salas (esquerda)
-- **Lista de salas** recentes (direita)
-- **Navegação rápida** para salas existentes
+### Home Page (`/`)
+- **Grid layout** with two columns
+- **Room creation form** (left)
+- **Recent rooms list** (right)
+- **Quick navigation** to existing rooms
 
-### 🎯 Página da Sala (`/room/:roomId`)
-- **Header** com navegação e botão de áudio
-- **Formulário de perguntas** com validação
-- **Lista de perguntas** e respostas
-- **Estados de carregamento** para IA
-- **Link para gravação** de áudio integrado
+### Room Page (`/room/:roomId`)
+- **Header** with navigation and audio button
+- **Question form** with validation
+- **Questions and answers list**
+- **Loading states** for AI
+- **Integrated audio recording** link
 
-### 🎙️ Página de Gravação (`/room/:roomId/audio`)
-- **Gravação de áudio** em tempo real
-- **Controles de gravação** (iniciar/pausar)
-- **Upload automático** em chunks de 5 segundos
-- **Verificação de compatibilidade** do navegador
-- **Processamento com IA** (transcrição + embeddings)
+### Recording Page (`/room/:roomId/audio`)
+- **Real-time audio recording**
+- **Recording controls** (start/pause)
+- **Automatic upload** in 5-second chunks
+- **Browser compatibility** verification
+- **AI processing** (transcription + embeddings)
 
-## 🔄 Fluxo de Dados
+## Data Flow
 
-1. **Criação de sala**: Form → API → Database → Atualização da lista
-2. **Listagem**: Cache TanStack Query → Renderização otimizada
-3. **Perguntas**: Validação → API → Database → Interface de resposta
-4. **Gravação de áudio**: MediaRecorder → Chunks → Upload → Gemini AI → Transcrição → Embeddings → PostgreSQL
-5. **Respostas contextuais**: Pergunta → Busca semântica → Contexto → Gemini AI → Resposta
-6. **Navegação**: React Router → Lazy loading → SEO otimizado
+1. **Room creation**: Form → API → Database → List update
+2. **Listing**: TanStack Query cache → Optimized rendering
+3. **Questions**: Validation → API → Database → Answer interface
+4. **Audio recording**: MediaRecorder → Chunks → Upload → Gemini AI → Transcription → Embeddings → PostgreSQL
+5. **Contextual answers**: Question → Semantic search → Context → Gemini AI → Answer
+6. **Navigation**: React Router → Lazy loading → SEO optimized
 
-## 🤖 Integração com IA
+## AI Integration
 
 ### Google Gemini AI
-- **Modelo**: `gemini-2.5-flash` para transcrição e respostas
-- **Embeddings**: `text-embedding-004` para busca semântica
-- **Transcrição**: Conversão de áudio para texto em português
-- **Geração de respostas**: Baseada no contexto das transcrições
-- **Busca vetorial**: PostgreSQL + pgvector para busca semântica
+- **Model**: `gemini-2.5-flash` for transcription and answers
+- **Embeddings**: `text-embedding-004` for semantic search
+- **Transcription**: Audio to text conversion in Portuguese
+- **Answer generation**: Based on transcription context
+- **Vector search**: PostgreSQL + pgvector for semantic search
 
-### Fluxo de Processamento de Áudio
-1. **Captura**: MediaRecorder API (WebM, 64kbps)
-2. **Upload**: Chunks de 5s via FormData
-3. **Transcrição**: Google Gemini AI
-4. **Embeddings**: Vetorização do texto
-5. **Armazenamento**: PostgreSQL com pgvector
-6. **Busca**: Similaridade semântica para respostas contextuais
+### Audio Processing Flow
+1. **Capture**: MediaRecorder API (WebM, 64kbps)
+2. **Upload**: 5-second chunks via FormData
+3. **Transcription**: Google Gemini AI
+4. **Embeddings**: Text vectorization
+5. **Storage**: PostgreSQL with pgvector
+6. **Search**: Semantic similarity for contextual answers
+
+## Monorepo Structure
+
+This project uses:
+- **Turborepo** - For build orchestration and caching
+- **pnpm workspaces** - For dependency management
+- **Shared configurations** - TypeScript, ESLint, Biome
+
+### Benefits
+- **Parallel execution** of tasks
+- **Intelligent caching** for faster builds
+- **Dependency management** across packages
+- **Optimized CI/CD** pipeline
+
+## License
+
+This project was developed during Rocketseat's NLW event.
+
+---
+
+<div align="center">
+  Made during NLW Agents
+</div>

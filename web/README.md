@@ -1,185 +1,185 @@
-# NLW Agents
+# NLW Agents - Web
 
-**Let me Ask** - Um projeto desenvolvido durante o evento NLW (Next Level Week) da Rocketseat.
+**Let me Ask** - A modern web application developed during Rocketseat's NLW (Next Level Week) event.
 
-Uma aplicação de perguntas e respostas com inteligência artificial, onde os usuários podem criar salas, fazer perguntas e receber respostas geradas por IA.
+An AI-powered question and answer application where users can create rooms, ask questions, and receive AI-generated responses.
 
-## ✨ Funcionalidades
+## Features
 
-- 🏠 **Criação de Salas** - Crie salas personalizadas para organizar suas perguntas
-- 📋 **Lista de Salas** - Visualize e acesse rapidamente salas criadas recentemente
-- ❓ **Sistema de Perguntas** - Faça perguntas e receba respostas da IA
-- 🎙️ **Gravação de Áudio** - Grave perguntas por áudio com transcrição automática
-- 🤖 **Respostas em Tempo Real** - Interface dinâmica com estados de carregamento
-- 🎨 **Interface Moderna** - Design responsivo e tema dark
-- 📱 **Navegação Intuitiva** - Roteamento fluido entre páginas
-- ⚡ **Atualizações Otimistas** - Interface reativa sem esperar resposta do servidor
+- **Create Rooms** - Create custom rooms to organize your questions
+- **Room List** - View and quickly access recently created rooms
+- **Question System** - Ask questions and receive AI-powered answers
+- **Audio Recording** - Record questions via audio with automatic transcription
+- **Real-time Answers** - Dynamic interface with loading states
+- **Modern Interface** - Responsive design with dark theme
+- **Intuitive Navigation** - Smooth routing between pages
+- **Optimistic Updates** - Reactive interface without waiting for server response
 
-## 🚀 Tecnologias Utilizadas
+## Technologies
 
 ### Frontend
-- **React 19.1.0** - Biblioteca principal para construção da interface
-- **TypeScript** - Superset do JavaScript com tipagem estática
-- **Vite** - Build tool e bundler moderno
-- **React Router DOM** - Roteamento para aplicações React
+- **React 19.2.0** - Main library for building the interface
+- **TypeScript** - JavaScript superset with static typing
+- **Vite** - Modern build tool and bundler
+- **React Router DOM** - Routing for React applications
 
-### Formulários & Validação
-- **React Hook Form** - Gerenciamento de formulários performático
-- **Zod** - Validação de esquemas TypeScript-first
-- **Hookform Resolvers** - Integração entre React Hook Form e Zod
+### Forms & Validation
+- **React Hook Form** - Performant form management
+- **Zod** - TypeScript-first schema validation
+- **Hookform Resolvers** - Integration between React Hook Form and Zod
 
 ### Styling
-- **Tailwind CSS 4.1.11** - Framework CSS utility-first
-- **Radix UI** - Componentes primitivos acessíveis
-- **Lucide React** - Biblioteca de ícones
-- **Shadcn/ui** - Sistema de componentes baseado em Radix UI
-- **tw-animate-css** - Extensão de animações para Tailwind
+- **Tailwind CSS 4.1.17** - Utility-first CSS framework
+- **Radix UI** - Accessible primitive components
+- **Lucide React** - Icon library
+- **Shadcn/ui** - Component system based on Radix UI
+- **tw-animate-css** - Animation extension for Tailwind
 
-### Utilitários
-- **TanStack Query** - Gerenciamento de estado assíncrono e cache
-- **Day.js** - Manipulação de datas com suporte a PT-BR
-- **Class Variance Authority** - Utilitário para variações de classes CSS
-- **clsx & tailwind-merge** - Utilitários para manipulação de classes CSS
+### Utilities
+- **TanStack Query** - Async state management and caching
+- **Day.js** - Date manipulation with PT-BR support
+- **Class Variance Authority** - CSS class variations utility
+- **clsx & tailwind-merge** - CSS class manipulation utilities
 
-### Ferramentas de Desenvolvimento
-- **Biome** - Linter e formatter JavaScript/TypeScript
-- **Ultracite** - Configuração base para Biome
-- **@types/dom-speech-recognition** - Tipagem para Web Speech API
+### Development Tools
+- **Biome** - JavaScript/TypeScript linter and formatter
+- **Ultracite** - Base configuration for Biome
+- **@types/dom-speech-recognition** - Web Speech API typing
+- **pnpm** - Fast, disk space efficient package manager
 
-## 📁 Estrutura do Projeto
+## Project Structure
 
 ```
 src/
 ├── components/
-│   ├── ui/                    # Componentes UI reutilizáveis (Shadcn/ui)
-│   ├── create-room-form.tsx   # Formulário de criação de salas
-│   ├── question-form.tsx      # Formulário para fazer perguntas
-│   ├── question-item.tsx      # Componente para exibir perguntas/respostas
-│   ├── question-list.tsx      # Lista de perguntas da sala
-│   └── room-list.tsx          # Lista de salas criadas
+│   ├── ui/                    # Reusable UI components (Shadcn/ui)
+│   ├── create-room-form.tsx   # Room creation form
+│   ├── question-form.tsx      # Question asking form
+│   ├── question-item.tsx      # Component to display questions/answers
+│   ├── question-list.tsx      # Room questions list
+│   └── room-list.tsx          # Created rooms list
 ├── http/
-│   ├── types/                 # Tipos TypeScript para API
-│   ├── use-create-room.ts     # Hook para criar salas
-│   ├── use-rooms.ts           # Hook para listar salas
-│   ├── use-create-question.ts # Hook para criar perguntas
-│   └── use-room-questions.ts  # Hook para listar perguntas da sala
+│   ├── types/                 # TypeScript types for API
+│   ├── use-create-room.ts     # Hook to create rooms
+│   ├── use-rooms.ts           # Hook to list rooms
+│   ├── use-create-question.ts # Hook to create questions
+│   └── use-room-questions.ts  # Hook to list room questions
 ├── lib/
-│   ├── dayjs.ts               # Configuração Day.js PT-BR
-│   └── utils.ts               # Utilitários (cn function)
+│   ├── dayjs.ts               # Day.js PT-BR configuration
+│   └── utils.ts               # Utilities (cn function)
 ├── pages/
-│   ├── create-room.tsx        # Página inicial com criação de salas
-│   ├── room.tsx               # Página da sala com perguntas
-│   └── record-room-audio.tsx  # Página de gravação de áudio
-├── app.tsx                    # Componente principal com roteamento
-├── main.tsx                   # Ponto de entrada
-└── index.css                  # Estilos globais e tema
+│   ├── create-room.tsx        # Home page with room creation
+│   ├── room.tsx               # Room page with questions
+│   └── record-room-audio.tsx  # Audio recording page
+├── app.tsx                    # Main component with routing
+├── main.tsx                   # Entry point
+└── index.css                  # Global styles and theme
 ```
 
-## 🎯 Funcionalidades Implementadas
+## Implemented Features
 
-### 🏠 Página Inicial (`/`)
-- **Criação de Salas**: Formulário com validação para nome e descrição
-- **Lista de Salas**: Visualização de salas recentes com:
-  - Data de criação (relativa)
-  - Número de perguntas
-  - Navegação rápida para salas
+### Home Page (`/`)
+- **Room Creation**: Form with validation for name and description
+- **Room List**: View recent rooms with:
+  - Creation date (relative)
+  - Number of questions
+  - Quick navigation to rooms
 
-### 🏠 Página da Sala (`/room/:roomId`)
-- **Formulário de Perguntas**: Validação de 10-500 caracteres
-- **Lista de Perguntas**: Visualização dinâmica de todas as perguntas da sala
-- **Respostas da IA**: Interface para perguntas e respostas com:
-  - Estados de carregamento com spinner
-  - Exibição condicional de respostas
-  - Timestamps relativos
-- **Navegação**: Botão de voltar e link para gravação de áudio
-- **Atualizações Otimistas**: Interface reativa que atualiza imediatamente
+### Room Page (`/room/:roomId`)
+- **Question Form**: Validation for 10-500 characters
+- **Question List**: Dynamic view of all room questions
+- **AI Answers**: Question and answer interface with:
+  - Loading states with spinner
+  - Conditional answer display
+  - Relative timestamps
+- **Navigation**: Back button and audio recording link
+- **Optimistic Updates**: Reactive interface that updates immediately
 
-### 🎙️ Página de Gravação (`/room/:roomId/audio`)
-- **Gravação de Áudio**: Captura de áudio do microfone
-- **Upload Automático**: Envio em chunks de 5 segundos
-- **Controles de Gravação**: Iniciar/pausar gravação
-- **Verificação de Suporte**: Detecção de compatibilidade do navegador
-- **Configurações Otimizadas**: 
-  - Cancelamento de eco
-  - Supressão de ruído
-  - Taxa de amostragem 44.1kHz
+### Recording Page (`/room/:roomId/audio`)
+- **Audio Recording**: Microphone audio capture
+- **Automatic Upload**: Upload in 5-second chunks
+- **Recording Controls**: Start/pause recording
+- **Support Verification**: Browser compatibility detection
+- **Optimized Settings**:
+  - Echo cancellation
+  - Noise suppression
+  - Sample rate 44.1kHz
   - Bitrate 64kbps
 
-### 🔧 Componentes Principais
-- **CreateRoomForm**: Formulário com React Hook Form + Zod
-- **QuestionForm**: Sistema de perguntas com validação e estados
-- **QuestionItem**: Exibição de perguntas/respostas com estados dinâmicos
-- **QuestionList**: Lista otimizada com TanStack Query
-- **RoomList**: Lista dinâmica com cache automático
+### Main Components
+- **CreateRoomForm**: Form with React Hook Form + Zod
+- **QuestionForm**: Question system with validation and states
+- **QuestionItem**: Question/answer display with dynamic states
+- **QuestionList**: Optimized list with TanStack Query
+- **RoomList**: Dynamic list with automatic caching
 
-## 🛠️ Padrões de Projeto
+## Design Patterns
 
-- **Component Composition** - Uso de Radix UI e Shadcn/ui para componentes compostos
-- **Atomic Design** - Organização dos componentes UI
-- **Custom Hooks** - Hooks personalizados para lógica de negócio (HTTP)
-- **Optimistic Updates** - Atualizações otimistas no TanStack Query
-- **Form Handling** - React Hook Form com validação Zod
-- **Type Safety** - TypeScript com tipagem estrita
-- **Path Mapping** - Alias `@/` para facilitar imports
-- **CSS-in-JS** - Utility-first com Tailwind CSS
-- **State Management** - TanStack Query para estado assíncrono
-- **Media Capture** - Web APIs para gravação de áudio
-- **Error Handling** - Tratamento de erros em mutations
+- **Component Composition** - Use of Radix UI and Shadcn/ui for composite components
+- **Atomic Design** - UI component organization
+- **Custom Hooks** - Custom hooks for business logic (HTTP)
+- **Optimistic Updates** - Optimistic updates in TanStack Query
+- **Form Handling** - React Hook Form with Zod validation
+- **Type Safety** - TypeScript with strict typing
+- **Path Mapping** - Alias `@/` to facilitate imports
+- **CSS-in-JS** - Utility-first with Tailwind CSS
+- **State Management** - TanStack Query for async state
+- **Media Capture** - Web APIs for audio recording
+- **Error Handling** - Error handling in mutations
 
-## ⚙️ Setup e Configuração
+## Setup and Configuration
 
-### Pré-requisitos
-- Node.js (versão 18 ou superior)
-- npm ou yarn
-- Servidor backend rodando em `http://localhost:3333`
+### Prerequisites
+- Node.js (version 18 or higher)
+- pnpm
+- Backend server running at `http://localhost:3333`
 
-### Instalação
+### Installation
 
-1. Clone o repositório
-2. Instale as dependências:
+1. Install dependencies:
 ```bash
-npm install
+pnpm install
 ```
 
-3. Inicie o servidor de desenvolvimento:
+2. Start the development server:
 ```bash
-npm run dev
+pnpm dev
 ```
 
-### Scripts Disponíveis
+### Available Scripts
 
 ```bash
-# Executar em modo de desenvolvimento
-npm run dev
+# Run in development mode
+pnpm dev
 
-# Build para produção
-npm run build
+# Build for production
+pnpm build
 
-# Preview da build de produção
-npm run preview
+# Preview production build
+pnpm preview
 
-# Formatar código
-make format
+# Format code
+pnpm format
 ```
 
-### Configuração do Ambiente
+### Environment Configuration
 
-O projeto utiliza:
-- **Vite** como bundler com hot reload
-- **Tailwind CSS** para estilização
-- **TypeScript** para tipagem
-- **Biome** para linting e formatação
-- **TanStack Query** para cache e sincronização
+The project uses:
+- **Vite** as bundler with hot reload
+- **Tailwind CSS** for styling
+- **TypeScript** for typing
+- **Biome** for linting and formatting
+- **TanStack Query** for caching and synchronization
 
 ### API Endpoints
 
-A aplicação se conecta com os seguintes endpoints:
+The application connects to the following endpoints:
 
 ```typescript
-// Listar salas
+// List rooms
 GET /rooms
 
-// Criar sala
+// Create room
 POST /rooms
 Content-Type: application/json
 {
@@ -187,88 +187,119 @@ Content-Type: application/json
   "description": "string"
 }
 
-// Listar perguntas de uma sala
+// List questions from a room
 GET /rooms/:roomId/questions
 
-// Criar pergunta em uma sala
+// Create question in a room
 POST /rooms/:roomId/questions
 Content-Type: application/json
 {
   "question": "string"
 }
 
-// Upload de áudio para uma sala
+// Upload audio to a room
 POST /rooms/:roomId/audio
 Content-Type: multipart/form-data
 {
-  "file": Blob // arquivo audio.webm
+  "file": Blob // audio.webm file
 }
 ```
 
-### Estrutura de Componentes
+### Component Structure
 
-O projeto segue o padrão do **Shadcn/ui**:
-- Componentes base em `src/components/ui/`
-- Configuração em `components.json`
-- Estilos base em `src/index.css`
+The project follows the **Shadcn/ui** pattern:
+- Base components in `src/components/ui/`
+- Configuration in `components.json`
+- Base styles in `src/index.css`
 
-## 🎨 Design System
+## Design System
 
 - **Base Color**: Zinc
-- **CSS Variables**: Habilitadas
+- **CSS Variables**: Enabled
 - **Style**: New York (Shadcn/ui)
 - **Icons**: Lucide React
-- **Theme**: Dark mode por padrão
-- **Animations**: tw-animate-css integrado
+- **Theme**: Dark mode by default
+- **Animations**: tw-animate-css integrated
 
-## 🔧 Configurações Técnicas
+## Technical Configuration
 
-- **TSConfig**: Configuração otimizada para Vite
-- **Path Aliases**: `@/` aponta para `./src`
-- **Biome**: Configuração com Ultracite preset
-- **Tailwind**: Integração via plugin do Vite
-- **Strict Mode**: TypeScript com verificações rigorosas
-- **Hot Reload**: Desenvolvimento com recarga automática
+- **TSConfig**: Optimized configuration for Vite
+- **Path Aliases**: `@/` points to `./src`
+- **Biome**: Configuration with Ultracite preset
+- **Tailwind**: Integration via Vite plugin
+- **Strict Mode**: TypeScript with strict checks
+- **Hot Reload**: Development with automatic reload
 
-## 🚀 Próximos Passos
+## Audio Features
 
-- [x] ✅ **Implementar gravação de áudio**
-- [x] ✅ **Adicionar sistema de perguntas completo**
-- [x] ✅ **Implementar atualizações otimistas**
-- [x] ✅ **Criar interface para respostas da IA**
-- [ ] 🔄 **Adicionar WebSocket para real-time**
-- [ ] 📱 **Melhorar responsividade mobile**
-- [ ] 🔐 **Implementar sistema de autenticação**
-- [ ] 🧪 **Adicionar testes unitários**
-- [ ] 🎨 **Implementar modo claro/escuro**
-
-## 🎙️ Funcionalidades de Áudio
-
-### Gravação de Áudio
-- **MediaRecorder API**: Gravação nativa do navegador
-- **Chunks de 5s**: Upload automático a cada 5 segundos
-- **Formato WebM**: Codec otimizado para web
-- **Configurações Avançadas**:
-  - Echo cancellation habilitado
-  - Noise suppression ativo
+### Audio Recording
+- **MediaRecorder API**: Native browser recording
+- **5-second Chunks**: Automatic upload every 5 seconds
+- **WebM Format**: Web-optimized codec
+- **Advanced Settings**:
+  - Echo cancellation enabled
+  - Active noise suppression
   - Sample rate: 44.1kHz
   - Audio bitrate: 64kbps
 
-### Compatibilidade
-- Verificação automática de suporte do navegador
-- Fallback graceful para navegadores sem suporte
-- Interface responsiva para diferentes dispositivos
+### Compatibility
+- Automatic browser support verification
+- Graceful fallback for unsupported browsers
+- Responsive interface for different devices
 
-## ⚡ Performance e Otimizações
+## Performance and Optimizations
 
 ### TanStack Query
-- **Cache Inteligente**: Reduz chamadas desnecessárias à API
-- **Optimistic Updates**: Interface reativa sem esperar servidor
-- **Background Refetch**: Sincronização automática em background
-- **Error Boundaries**: Tratamento robusto de erros
+- **Smart Cache**: Reduces unnecessary API calls
+- **Optimistic Updates**: Reactive interface without waiting for server
+- **Background Refetch**: Automatic background synchronization
+- **Error Boundaries**: Robust error handling
 
-### Estado da Aplicação
-- **Real-time Updates**: Interface atualiza em tempo real
-- **Loading States**: Indicadores visuais para todas as operações
-- **Error Handling**: Rollback automático em caso de falha
-- **Type Safety**: Tipagem completa end-to-end
+### Application State
+- **Real-time Updates**: Interface updates in real-time
+- **Loading States**: Visual indicators for all operations
+- **Error Handling**: Automatic rollback on failure
+- **Type Safety**: Complete end-to-end typing
+
+## Dependencies
+
+### Production
+- `@hookform/resolvers` - Validation resolvers for React Hook Form
+- `@radix-ui/react-label` - Accessible label component
+- `@radix-ui/react-slot` - Component composition utility
+- `@tailwindcss/vite` - Tailwind integration for Vite
+- `@tanstack/react-query` - Async state management
+- `class-variance-authority` - CSS class variants
+- `clsx` - Class name utility
+- `dayjs` - Date manipulation
+- `lucide-react` - Icon library
+- `react` - UI library
+- `react-dom` - React DOM renderer
+- `react-hook-form` - Form management
+- `react-router-dom` - Routing
+- `tailwind-merge` - Tailwind class merger
+- `tailwindcss` - CSS framework
+- `zod` - Schema validation
+
+### Development
+- `@biomejs/biome` - Linter and formatter
+- `@types/dom-speech-recognition` - Speech API types
+- `@types/node` - Node.js type definitions
+- `@types/react` - React type definitions
+- `@types/react-dom` - React DOM type definitions
+- `@vitejs/plugin-react` - React plugin for Vite
+- `tw-animate-css` - Tailwind animations
+- `typescript` - TypeScript compiler
+- `ultracite` - Biome configuration preset
+- `vite` - Build tool
+
+## 📝 Notes
+
+- The application requires the backend server running at `http://localhost:3333`
+- Audio recording works best in modern browsers (Chrome, Firefox, Edge)
+- The interface is optimized for desktop but works on mobile devices
+- Dark theme is the default and only theme currently implemented
+
+---
+
+Part of the **NLW Agents** monorepo managed by Turborepo and pnpm.
