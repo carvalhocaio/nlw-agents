@@ -1,10 +1,5 @@
 # NLW Agents
 
-<div align="center">
-  <img src=".github/screenshot-1.png" alt="Application Home Page" width="800px">
-  <img src=".github/screenshot-2.png" alt="Question Room Page" width="800px">
-</div>
-
 **Let me Ask** - A complete web application with AI-powered Q&A system developed during Rocketseat's NLW event.
 
 An intelligent question and answer application where users can create custom rooms, ask questions, and receive AI-generated responses powered by Google Gemini.
